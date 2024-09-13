@@ -11,7 +11,7 @@ export default function CategoryProducts() {
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">New Arrivals</h1>
+                <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{currentCategory.category}</h1>
 
                 <ol role="list" className="flex items-center space-x-4 py-8">
                     <li >
@@ -25,8 +25,8 @@ export default function CategoryProducts() {
                         </div>
                     </li>
                     <li className="text-sm">
-                        <Link to="/categories" aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                            New Arrivals
+                        <Link to={`/categories/${currentCategory.id}`} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
+                            {currentCategory.category}
                         </Link>
                     </li>
                 </ol>
@@ -34,7 +34,7 @@ export default function CategoryProducts() {
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products && products.map((product) => (
                         <div key={product.id} className="group relative">
-                            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-120">
                                 <img
                                     alt={product.imageAlt}
                                     src={product.imageSrc}
@@ -44,7 +44,7 @@ export default function CategoryProducts() {
                             <div className="mt-4 flex justify-between">
                                 <div>
                                     <h3 className="text-sm text-gray-700">
-                                        <Link to="/product">
+                                        <Link to={`/categories/${currentCategory.id}/products/${product.id}`}>
                                             <span aria-hidden="true" className="absolute inset-0" />
                                             {product.name}
                                         </Link>
