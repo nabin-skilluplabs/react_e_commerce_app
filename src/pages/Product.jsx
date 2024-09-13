@@ -20,7 +20,22 @@ export default function Product() {
 
   function addToCart() {
     const cartValue = cookies.cart ? cookies.cart : [];
-    setCookie('cart', JSON.stringify([...cartValue, {category: currentCategory.id, product: currentProduct.id}])  )
+    let alreadyExists = false;
+    const updatedCartValue =  cartValue.map(item => {
+      if((item.category === currentCategory.id) && (item.product === currentProduct.id)) {
+        alreadyExists = true;
+        return {...item, count: item.count + 1};
+      }
+      return item;
+    })
+
+    if(alreadyExists) {
+      setCookie('cart', JSON.stringify(updatedCartValue));
+    }
+    else {
+      setCookie('cart', JSON.stringify([...updatedCartValue, {category: currentCategory.id, count: 1, product: currentProduct.id}]));
+    }
+    
     navigate("/cart");
   }
 
