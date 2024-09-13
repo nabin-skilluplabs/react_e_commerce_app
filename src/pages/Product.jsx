@@ -19,7 +19,7 @@ export default function Product() {
   const currentProduct = products.find(item => item.id == product);
 
   function addToCart() {
-    const cartValue = cookies.cart ? JSON.parse(cookies.cart) : [];
+    const cartValue = cookies.cart ? cookies.cart : [];
     setCookie('cart', JSON.stringify([...cartValue, {category: currentCategory.id, product: currentProduct.id}])  )
     navigate("/cart");
   }
